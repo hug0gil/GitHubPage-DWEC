@@ -1,15 +1,18 @@
+const actual = new Date()
+const navidad = new Date(actual.getFullYear(), 11, 25)
+
+console.log(actual)
+console.log(navidad)
+
+const diferenciaMs = navidad - actual;
+
+console.log(diferenciaMs)
+
+const dias = Math.floor((diferenciaMs/1000)/3600/24)
+
+alert("Quedan "+dias+" días para navidad")
+
 /*
-9. Escriba una función de JavaScript para poner en mayúscula la primera letra
-de cada palabra en una cadena
- */
-
-function ponerMayus(palabras) {
-  finalSentence = ""
-  partes = palabras.split(" ")
-  for (i = 0; i < partes.length; i++) {
-    finalSentence +=  (partes[i].charAt(0).toUpperCase()).concat(partes[i].substring(1,partes[i].length)+" ")
-  }
-  return finalSentence
-}
-
-console.log(ponerMayus("hola me llamo hugo"))
+9. Escriba un programa JavaScript para calcular los días que quedan hasta la
+próxima Navidad.
+*/
