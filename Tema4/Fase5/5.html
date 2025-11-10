@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <img src="https://picsum.photos/id/237/200/150" alt="Imagen 1">
+    <img src="https://picsum.photos/id/238/200/150" alt="Imagen 2">
+    <img src="https://picsum.photos/id/239/200/150" alt="Imagen 3">
+
+    <p id="info"></p>
+
+    <script>
+        /*
+           5
+           Realizar un evento que muestre la url que tiene asociada cada imagen, cada vez que se pase el ratón
+           por encima de ella.
+        */
+
+        const imagenes = document.querySelectorAll("img");
+        const info = document.getElementById("info");
+
+        imagenes.forEach(img => {
+            img.addEventListener("mouseover", () => {
+                info.textContent = `URL: ${img.src}`;
+            });
+            img.addEventListener("mouseout", () => {
+                info.textContent = "";
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <img src="../../images/Paisaje1.jpg" style="width: 500px;" id="paisaje" draggable="false">
+
+    <script>
+        /*
+        Coloque en la aplicación una imagen:
+        - Mientras se mantenga click pulsado cambiar por otra imagen
+        - Cuando se suelta el click debe volver a la primera imagen
+        */
+        const img = document.getElementById("paisaje")
+        const srcOriginal = img.src
+        const srcAlternativa = "../../../images/Paisaje2.jpeg"
+
+        img.addEventListener("mousedown", () => {
+            img.src = srcAlternativa
+        })
+
+        document.addEventListener("mouseup", () => {
+            img.src = srcOriginal
+        })
+        // Se hace en document para que detecte cuando se deja de clicar aunque esté fuera del rango del img
+    </script>
+</body>
+
+</html>

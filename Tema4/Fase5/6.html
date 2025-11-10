@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <script>
+        /*
+        6
+        Realizar un script que muestre la tecla pulsada de teclado, y si se ha pulsado combinada con alt,
+        shift o control también lo indique.
+        */
+
+        document.addEventListener("keydown", e => {
+            let texto = `Tecla pulsada: ${e.key}`;
+            if (e.altKey) texto += " + ALT";
+            if (e.shiftKey) texto += " + SHIFT";
+            if (e.ctrlKey) texto += " + CTRL";
+            console.log(texto)
+        });
+    </script>
+</body>
+
+</html>
