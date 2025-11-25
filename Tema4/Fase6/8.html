@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Archivos</title>
+</head>
+
+<body>
+    <script>
+        const fs = {
+            carpeta1: {
+                archivo1: "contenido1",
+                archivo2: "contenido2",
+                subcarpeta: {
+                    archivo3: "contenido3"
+                }
+            },
+            carpeta2: {
+                archivo4: "contenido4"
+            }
+        };
+
+        function listarArchivos(obj) {
+            let archivos = [];
+            for (const key in obj) {
+                if (typeof obj[key] === "object") {
+                    archivos = archivos.concat(listarArchivos(obj[key]));
+                } else {
+                    archivos.push(key);
+                }
+            }
+            return archivos;
+        }
+
+        console.log(listarArchivos(fs)); // ["archivo1", "archivo2", "archivo3", "archivo4"]
+    </script>
+</body>
+
+</html>

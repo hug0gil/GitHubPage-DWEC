@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <script>
+        function operar(a, b, callback) {
+            return callback(a, b);
+        }
+
+        function suma(x, y) { return x + y; }
+        function resta(x, y) { return x - y; }
+        function multiplicacion(x, y) { return x * y; }
+
+        console.log(operar(5, 3, suma)); // 8
+        console.log(operar(5, 3, resta)); // 2
+        console.log(operar(5, 3, multiplicacion)); // 15
+    </script>
+</body>
+</html>

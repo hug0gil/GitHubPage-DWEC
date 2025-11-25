@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <script>
+        function crearUsuario({nombre = "desconocido", edad = "desconocido", pais = "desconocido"} = {}) {
+            return `${nombre}, ${edad} años, ${pais}`;
+        }
+
+        console.log(crearUsuario({nombre: "Juan", edad: 20, pais: "España"}));
+        console.log(crearUsuario({nombre: "Ana"}));
+    </script>
+</body>
+</html>

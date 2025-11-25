@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Permutar Array</title>
+</head>
+
+<body>
+    <script>
+        function permutar(arr) {
+            if (arr.length === 0) return [[]];
+            const result = [];
+            for (let i = 0; i < arr.length; i++) {
+                const rest = arr.slice(0, i).concat(arr.slice(i + 1));
+                for (const perm of permutar(rest)) {
+                    result.push([arr[i], ...perm]);
+                }
+            }
+            return result;
+        }
+
+        console.log(permutar([1, 2, 3]));
+    </script>
+</body>
+
+</html>

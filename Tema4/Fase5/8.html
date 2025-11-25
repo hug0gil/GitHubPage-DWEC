@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Arrays 3x3</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 8px 12px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Array 1</h2>
+  <div id="array1"></div>
+
+  <h2>Array 2</h2>
+  <div id="array2"></div>
+
+  <h2>Suma de Arrays</h2>
+  <div id="suma"></div>
+
+  <script>
+    // Crear arrays 3x3 con números aleatorios del 0 al 9
+    let array1 = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => Math.floor(Math.random() * 10)));
+    let array2 = Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => Math.floor(Math.random() * 10)));
+
+    const mapa = new Map();
+
+    // Función para convertir un array 3x3 en tabla HTML
+    function arrayToTable(arr) {
+      let html = '<table>';
+      arr.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => {
+          html += `<td>${cell}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</table>';
+      return html;
+    }
+
+    // Mostrar arrays en HTML
+    document.getElementById('array1').innerHTML = arrayToTable(array1);
+    document.getElementById('array2').innerHTML = arrayToTable(array2);
+
+    // Calcular suma y mostrar
+    let sumaArray = Array.from({ length: 3 }, () => Array(3));
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let suma = array1[i][j] + array2[i][j];
+        sumaArray[i][j] = suma;
+        mapa.set(`Suma de Pos[${i}][${j}]`, suma);
+      }
+    }
+    document.getElementById('suma').innerHTML = arrayToTable(sumaArray);
+
+    console.log("Array 1:", array1);
+    console.log("Array 2:", array2);
+    console.log("Mapa de sumas:", mapa);
+  </script>
+
+</body>
+
+</html>
