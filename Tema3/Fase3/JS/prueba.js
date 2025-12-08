@@ -53,7 +53,7 @@ for (let i = 0; i < values.length; i++) {
 }
 
 let max = 0
-let nombre = ""
+let name = ""
 valoresJugadores.forEach((value, key) => {
   if (value > max) {
     max = value

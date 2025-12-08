@@ -3,7 +3,7 @@
 caracteres de una cadena.
 */
 
-function nCaracteres(palabra){
+function nCaracteres(palabra) {
     return palabra.length
 }
 
