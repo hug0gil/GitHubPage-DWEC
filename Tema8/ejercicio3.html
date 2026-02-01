@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #ff1f1f;
+            color: white;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        input {
+            width: 15%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Productos buscados de Hugo Gil</h1>
+    <input type="text" id="valorBusqueda" placeholder="Busca el producto deseado">
+    <button onclick="buscarProductos()">Buscar</button>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+        </tbody>
+    </table>
+    <script>
+
+        let products = []
+
+        async function buscarProductos() {
+            const cuerpoTabla = document.getElementById("tablaBody");
+            const ids = []
+            const input = document.getElementById("valorBusqueda");
+
+
+            cuerpoTabla.innerHTML = "";
+
+            try {
+                console.clear()
+
+                const res = await fetch(`https://dummyjson.com/products/search?q=${input.value}`)
+
+                const data = await res.json();
+
+                products = data.products;
+
+                console.log(products)
+
+                if (products.length === 0) {
+                    alert("No se encontraron productos que coincidan con tu búsqueda " + input.value)
+
+                }
+                else {
+                    for (const p of products) {
+
+                        cuerpoTabla.innerHTML += `
+                                <tr>
+                                        <td><img src="${p.images[0]}"></td>
+                                        <td>${p.title}</td>
+                                        <td>${p.description}</td>
+                                        <td>${p.discountPercentage}</td>
+                                </tr>
+                `
+                    }
+                }
+            } catch (error) {
+                console.log(error)
+                alert("Hubo un error al conectar con la DummyJSON " + error);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #ff1f1f;
+            color: white;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Productos de Hugo Gil</h1>
+    <button onclick="cargarProductos()">Cargar productos</button>
+    <button onclick="cargarFiltrado()">Filtrar por stock bajo</button>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+        </tbody>
+    </table>
+    <script>
+
+        let products = []
+
+        async function cargarProductos() {
+            const cuerpoTabla = document.getElementById("tablaBody");
+            const ids = []
+
+
+            cuerpoTabla.innerHTML = "";
+
+            try {
+                console.clear()
+
+                const res = await fetch(`https://dummyjson.com/products`)
+
+                const data = await res.json();
+
+                products = data.products;
+
+                for (let i = 0; i < 3; i++) {
+                    ids.push(Math.floor(Math.random() * products.length))
+                }
+
+                console.log(products)
+
+
+                for (const id of ids) {
+                    if (!products[id].brand) {
+                        products[id].brand = "Store brand"
+                    }
+
+                    cuerpoTabla.innerHTML += `
+                                <tr>
+                                        <td>${products[id].title}</td>
+                                        <td>${products[id].price}</td>
+                                        <td>${products[id].stock}</td>
+                                        <td>${products[id].brand}</td>
+                                </tr>
+                `
+                }
+            } catch (error) {
+                console.log(error)
+                alert("Hubo un error al conectar con la DummyJSON");
+            }
+        }
+
+        async function cargarFiltrado() {
+            const cuerpoTabla = document.getElementById("tablaBody");
+
+            cuerpoTabla.innerHTML = "";
+
+            try {
+                const res = await fetch(`https://dummyjson.com/products`)
+
+                const data = await res.json();
+
+                products = data.products;
+
+                const filtered = products.filter(p => p.stock < 10);
+
+                console.log(filtered)
+
+
+                for (const f of filtered) {
+
+                    cuerpoTabla.innerHTML += `
+                                <tr>
+                                    <td>${f.title}</td>
+                                    <td>${f.price}</td>
+                                    <td>${f.stock}</td>
+                                    <td>${f.brand}</td>
+                                </tr>
+                `
+                }
+            } catch (error) {
+                console.log(error)
+                alert("Hubo un error al conectar con la DummyJSON");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

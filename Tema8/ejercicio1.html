@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #ff1f1f;
+            color: white;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Equipo randomizado pokemon de Hugo Gil</h1>
+    <button onclick="cargarEquipo()">Cargar Entrenador</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>EXP</th>
+            </tr>
+        </thead>
+        <tbody id="tablaBody">
+        </tbody>
+    </table>
+    <script>
+
+        async function cargarEquipo() {
+            const cuerpoTabla = document.getElementById("tablaBody");
+            const ids = []
+
+            for (let i = 0; i < 3; i++) {
+                ids.push(Math.floor(Math.random() * 1000) + 1)
+            }
+            cuerpoTabla.innerHTML = "";
+
+            try {
+                for (const id of ids) {
+
+                    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+
+                    const pokemon = await res.json();
+
+                    console.log(pokemon)
+
+                    cuerpoTabla.innerHTML += `
+                <td><img src=${pokemon.sprites.front_shiny}></td>
+                <td>${pokemon.name}</td>
+                <td>${pokemon.base_experience}</td>
+                `
+                }
+            } catch (error) {
+                alert("Hubo un error al conectar con la PokéAPI");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
